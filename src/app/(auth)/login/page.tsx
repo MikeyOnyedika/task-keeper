@@ -1,8 +1,8 @@
-import Textbox from "@/app/(auth)/components/Textbox";
+import Textbox from "@/app/components/FormInput/Textbox";
 import Link from "next/link";
 import Image from "next/image";
 import { Github } from "@/app/assets";
-import SubmitBtn from "../components/SubmitBtn";
+import SubmitBtn from "../../components/FormInput/SubmitBtn";
 
 export default function Login() {
   const signupUrl = "/signup";

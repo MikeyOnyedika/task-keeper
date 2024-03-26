@@ -10,14 +10,27 @@ const config: Config = {
     colors: {
       primary: "white",
       secondary: "#1B161D",
-      accent: "#D778FA",
-      "accent-dark": "#865498",
+      accent: {
+        DEFAULT: "#D778FA",
+        dark: "#865498",
+      },
       "gray-5": "#EDEDED",
       "gray-25": "#B6B6B6",
       "gray-50": "#818181",
       "gray-75": "#3E3E3E",
-      red: "#C33636",
+      red: {
+        DEFAULT: "#C33636",
+        dark: "#8A0000",
+      },
       green: "#41C336",
+    },
+    backgroundImage: {
+      checkmark: "url('./assets/checkmark.svg')",
+    },
+    extend: {
+      boxShadow: {
+        outline: "0 0 0 1.5px black",
+      },
     },
   },
   plugins: [],

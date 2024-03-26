@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: ReactNode }) {
   const path = usePathname();
 
   return (
-    <div className="flex flex-col h-full w-full">
+    <div className="flex flex-col h-full w-full"> 
       <header className="py-2 px-4 flex items-center justify-between">
         <div className="flex items-center font-bold gap-2">
           <Link href={homePath}>
@@ -23,7 +23,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           <Link href={projectsPath} className="hover:text-accent">
             projects
           </Link>
-          {path !== "/projects" ? (
+          {path !== projectsPath ? (
             <>
               <span>&gt;</span>
               <p>{projectName}</p>
@@ -36,7 +36,7 @@ export default function Layout({ children }: { children: ReactNode }) {
           {/* <p>victor</p> */}
         </div>
       </header>
-      <main>{children}</main>
+      <main className="flex w-full h-full">{children}</main>
     </div>
   );
 }

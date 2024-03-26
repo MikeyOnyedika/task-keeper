@@ -2,9 +2,9 @@
 import Image from "next/image";
 import { useFormik } from "formik";
 import Link from "next/link";
-import Textbox from "../components/Textbox";
+import Textbox from "../../components/FormInput/Textbox";
 import { Github } from "@/app/assets";
-import SubmitBtn from "@/app/(auth)/components/SubmitBtn"
+import SubmitBtn from "@/app/components/FormInput/SubmitBtn";
 
 export default function Signup() {
   const loginUrl = "/login";

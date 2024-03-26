@@ -1,5 +1,5 @@
 import { status } from "@/app/constants";
-import StatusRender from "./StatusRender";
+import StatusIndicator from "./StatusIndicator";
 import Link from "next/link";
 
 type Props = {
@@ -26,7 +26,7 @@ export default function ProjectItem({
       <article className="rounded-md border-2 border-gray-5 p-3">
         <div className="flex justify-between items-center">
           <h3 className="text-lg">{title}</h3>
-          <StatusRender currentStatus={currentStatus} />
+          <StatusIndicator currentStatus={currentStatus} />
         </div>
         <p>
           tasks completed: {completedTasksCount}/{totalTasksCount}
