@@ -34,8 +34,13 @@ export type Tag = {
 };
 
 export type Resource = {
+  id: string,
+  projectId: string,
+  userId: string,
   title: string;
+  // TODO: type this link property to be a type called URL. This URL type will be a type that uses regex to make sure you can only pass string values that satisfy the pattern of a valid web url
   link: string;
+  description: string;
 };
 
 export type TaskList = {
@@ -63,4 +68,4 @@ export type SelectOption<T extends string = string> = {
   value: T;
 };
 
-export type TimeUnit = typeof timeUnit[keyof typeof timeUnit] 
+export type TimeUnit = (typeof timeUnit)[keyof typeof timeUnit];

@@ -3,8 +3,6 @@ import Textbox from "@/app/components/FormInput/Textbox";
 import Selectbox from "@/app/components/FormInput/Selectbox";
 import { statusOptions } from "@/app/constants";
 
-
-
 // TODO: continue by implementing the selectbox. Start with allowing it accept label, name and option props
 
 export default function Overview() {

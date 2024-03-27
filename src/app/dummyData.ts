@@ -20,6 +20,36 @@ export const projects: Project[] = [
   },
 ];
 
+export const resources = [
+  {
+    id: "1",
+    projectId: "2",
+    userId: "2",
+    title: "web.dev html text tutorial",
+    link: "https://web.dev/learn/html",
+    description:
+      "This is an article that allows me learn how to markup text in html properly.",
+  },
+  {
+    id: "2",
+    projectId: "2",
+    userId: "2",
+    title: "freecodecamp how to start coding",
+    link: "https://freecodecamp.org",
+    description:
+      "An artiel from free code camp on how to start coding right now. Really has some great points I should note down",
+  },
+  {
+    id: "3",
+    projectId: "2",
+    userId: "2",
+    title: "Mdn css tutorial on flexbox",
+    link: "https://developer.mozilla.org/",
+    description:
+      "Official tutorial from mozilla themselves on CSS. Covers helpful concepts and parts of CSS like flexbox, grid and alot of other modern css features like has() and so on",
+  },
+];
+
 export const taskLists: TaskList[] = [
   {
     id: "1",

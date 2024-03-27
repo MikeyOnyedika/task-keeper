@@ -25,7 +25,6 @@ export default function TaskItemForm({
     <div className="fixed inset-0 bg-opacity-50 bg-secondary flex justify-center items-center ">
       <div className="flex items-start w-full max-w-[40rem] gap-2 p-4">
         <div className="flex flex-col w-full  gap-4 p-4 border-2 border-accent rounded-md border-opacity-50 bg-primary">
-          {/* <h4 className="text-lg">{taskItem?.title}</h4> */}
           <h4 className="text-xl font-bold text-center ">Edit Task</h4>
           <form className="flex flex-col gap-2">
             <Textbox
