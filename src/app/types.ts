@@ -1,9 +1,11 @@
+import { NextRequest, NextResponse } from "next/server";
 import {
   displayOptions,
   projectTabs,
   status,
   priority,
   timeUnit,
+  httpMethod,
 } from "./constants";
 
 export type Status = (typeof status)[keyof typeof status];
@@ -34,9 +36,9 @@ export type Tag = {
 };
 
 export type Resource = {
-  id: string,
-  projectId: string,
-  userId: string,
+  id: string;
+  projectId: string;
+  userId: string;
   title: string;
   // TODO: type this link property to be a type called URL. This URL type will be a type that uses regex to make sure you can only pass string values that satisfy the pattern of a valid web url
   link: string;
@@ -69,3 +71,12 @@ export type SelectOption<T extends string = string> = {
 };
 
 export type TimeUnit = (typeof timeUnit)[keyof typeof timeUnit];
+
+export type MiddlewareFn = (
+  request: NextRequest & { export?: any }
+) => Promise<NextResponse>;
+
+export type MiddlewareConfig = {
+  req: NextRequest;
+  fns: MiddlewareFn[];
+};
