@@ -100,6 +100,16 @@ const timeUnitOptions = [
   },
 ];
 
+const httpMethod = {
+  GET: "GET",
+  POST: "POST",
+  DELETE: "DELETE",
+  PUT: "PUT",
+  PATCH: "PATCH",
+  HEAD: "HEAD",
+  OPTIONS: "OPTIONS",
+} as const;
+
 export {
   status,
   statusOptions,
@@ -109,4 +119,5 @@ export {
   displayOptions,
   timeUnit,
   timeUnitOptions,
+  httpMethod
 };

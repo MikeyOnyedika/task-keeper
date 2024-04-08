@@ -5,8 +5,8 @@ import {
   status,
   priority,
   timeUnit,
-  httpMethod,
 } from "./constants";
+import type { User } from "./lib/db/mongooseModels/User";
 
 export type Status = (typeof status)[keyof typeof status];
 
@@ -72,11 +72,47 @@ export type SelectOption<T extends string = string> = {
 
 export type TimeUnit = (typeof timeUnit)[keyof typeof timeUnit];
 
-export type MiddlewareFn = (
-  request: NextRequest & { export?: any }
-) => Promise<NextResponse>;
-
-export type MiddlewareConfig = {
-  req: NextRequest;
-  fns: MiddlewareFn[];
+export type SignupBody = {
+  username: string;
+  password: string;
+  email: string;
 };
+
+export type SignupBodyValidationSuccess = {
+  operationStatus: "success";
+  body: SignupBody;
+};
+
+export type SignupBodyValidationError = {
+  operationStatus: "error";
+  errors: {
+    message: string;
+    field: string | number;
+  }[];
+};
+
+export type SignupBodyValidationResult =
+  | SignupBodyValidationSuccess
+  | SignupBodyValidationError;
+
+export type OperationStatus = "success" | "error";
+
+export type CheckUserAlreadyExistsResult =
+  | {
+      operationStatus: "success";
+      userAlreadyExists: boolean;
+    }
+  | {
+      operationStatus: "error";
+      error: string;
+    };
+
+export type DBCreateUserResult =
+  | {
+      operationStatus: "success";
+      user: Omit<User, "password">;
+    }
+  | {
+      operationStatus: "error";
+      error: string;
+    };

@@ -1,4 +1,4 @@
-import { InferSchemaType, model, Schema, SchemaDefinition } from "mongoose";
+import { InferSchemaType, model, Schema, models } from "mongoose";
 
 const userSchema = new Schema(
   {
@@ -11,14 +11,14 @@ const userSchema = new Schema(
       required: true,
       unique: true,
     },
-    hashedPassword: {
+    password: {
       type: String,
-    }
+    },
   },
   {
     timestamps: true,
   }
 );
 
-type User = InferSchemaType<typeof userSchema>;
-export default model<User>("User", userSchema);
+export type User = InferSchemaType<typeof userSchema>;
+export const _User = models.User || model<User>("User", userSchema);

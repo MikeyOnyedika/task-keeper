@@ -37,5 +37,4 @@ export const taskListSchema = new Schema(
   }
 );
 
-const TaskListModel = model("TaskList", taskListSchema);
-export default TaskListModel
+export const _TaskList = model("TaskList", taskListSchema);
