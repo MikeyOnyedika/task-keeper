@@ -1,9 +1,8 @@
-import { DBCreateUserResult, SignupBody } from "@/app/types";
+import { DBCreateUserResult, DBFindOneUserByEmailResult, SignupBody } from "@/app/types";
 import { _User } from "../mongooseModels/User";
 import { connect } from "@/app/lib/db/connect";
 
 export default class User {
-
   static async create({
     username,
     email,
@@ -37,9 +36,20 @@ export default class User {
     }
   }
 
-  static async findOneByEmail(email: string) {
-    const conn = await connect();
-    const user = await _User.findOne({ email });
-    return user;
+  static async findOneByEmail(email: string): Promise<DBFindOneUserByEmailResult> {
+    try {
+      const conn = await connect();
+      const user = await _User.findOne({ email });
+
+      return {
+        operationStatus: "success",
+        user,
+      };
+    } catch (err) {
+      return {
+        operationStatus: "error",
+        error: "Couldn't complete find user by email request",
+      };
+    }
   }
 }

@@ -95,6 +95,19 @@ export type SignupBodyValidationResult =
   | SignupBodyValidationSuccess
   | SignupBodyValidationError;
 
+export type LoginBodyValidationResult =
+  | {
+      operationStatus: "success";
+      body: Omit<SignupBody, "username">;
+    }
+  | {
+      operationStatus: "error";
+      errors: {
+        message: string;
+        field: string | number;
+      }[];
+    };
+
 export type OperationStatus = "success" | "error";
 
 export type CheckUserAlreadyExistsResult =
@@ -116,3 +129,18 @@ export type DBCreateUserResult =
       operationStatus: "error";
       error: string;
     };
+
+export type DBFindOneUserByEmailResult =
+  | {
+      operationStatus: "success";
+      user: (Omit<User, "password"> & { _id: string }) | undefined;
+    }
+  | {
+      operationStatus: "error";
+      error: string;
+    };
+
+export type ZodFieldError = {
+  message: string;
+  field: string | number;
+};

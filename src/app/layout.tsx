@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import font from "./font"
-
+import font from "./font";
+import { Toaster } from "react-hot-toast";
 
 export const metadata: Metadata = {
   title: "Task Keeper",
@@ -15,7 +15,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`flex flex-col w-screen h-screen text-gray-75 ${font.className}`}>{children}</body>
+      <body
+        className={`flex flex-col w-screen h-screen text-gray-75 ${font.className}`}
+      >
+        <Toaster />
+        {children}
+      </body>
     </html>
   );
 }
