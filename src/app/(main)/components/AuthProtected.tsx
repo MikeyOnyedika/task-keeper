@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { ReactNode } from "react";
-import options from "@/app/api/auth/[...nextauth]/options";
+import options from "@/app/api/(auth)/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
 import AuthStateMonitor from "./AuthStateMonitor";
