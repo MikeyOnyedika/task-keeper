@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import font from "./font";
 import { Toaster } from "react-hot-toast";
+import ReactQueryProvider from "./contexts/ReactQueryProvider";
 
 export const metadata: Metadata = {
   title: "Task Keeper",
@@ -19,7 +20,7 @@ export default function RootLayout({
         className={`flex flex-col w-screen h-screen text-gray-75 ${font.className}`}
       >
         <Toaster />
-        {children}
+        <ReactQueryProvider>{children}</ReactQueryProvider>
       </body>
     </html>
   );

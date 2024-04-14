@@ -6,10 +6,17 @@ export async function checkUserAlreadyExists(
   email: string
 ): Promise<CheckUserAlreadyExistsResult> {
   try {
-    const user = await User.findOneByEmail(email);
+    const findUserResult = await User.findOneByEmail(email);
     const operationStatus = "success";
 
-    if (user) {
+    if (findUserResult.operationStatus === "error") {
+      return {
+        operationStatus: "error",
+        error: findUserResult.error,
+      };
+    }
+
+    if (findUserResult.user) {
       return {
         operationStatus,
         userAlreadyExists: true,
@@ -20,7 +27,6 @@ export async function checkUserAlreadyExists(
       userAlreadyExists: false,
     };
   } catch (err) {
-    console.log("checkuserexists err: ", err);
     return {
       operationStatus: "error",
       error: "Failed to complete request",

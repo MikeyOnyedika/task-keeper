@@ -1,4 +1,4 @@
-import { LegacyRef } from "react";
+import { LegacyRef, MutableRefObject } from "react";
 
 type Props = {
   type?: "text" | "password" | "textarea";
@@ -7,7 +7,11 @@ type Props = {
   value: string;
   name: string;
   onChange: OnChange;
-  errRef?: any
+  errRef?: any;
+  ref?:
+    | LegacyRef<HTMLInputElement>
+    | LegacyRef<HTMLTextAreaElement>
+    | MutableRefObject<HTMLInputElement | undefined>;
 };
 
 type OnChange = (update: { [key: string]: string }) => void;
@@ -20,6 +24,7 @@ export default function Textbox({
   value,
   onChange,
   errRef,
+  ref,
 }: Props) {
   return (
     <div className="flex flex-col gap-1 w-full">
@@ -36,6 +41,7 @@ export default function Textbox({
           placeholder={placeholder}
           rows={5}
           onChange={(e) => onChange({ [name]: e.target.value })}
+          ref={ref as LegacyRef<HTMLTextAreaElement>}
         ></textarea>
       ) : (
         <input
@@ -46,9 +52,10 @@ export default function Textbox({
           className="border-[1px] border-gray-25 rounded px-4 py-2"
           placeholder={placeholder}
           onChange={(e) => onChange({ [name]: e.target.value })}
+          ref={ref as LegacyRef<HTMLInputElement>}
         />
       )}
-      <p ref={errRef}></p>
+      <p className="text-red-dark text-sm" ref={errRef}></p>
     </div>
   );
 }

@@ -6,7 +6,10 @@ import {
   priority,
   timeUnit,
 } from "./constants";
-import type { User } from "./lib/db/mongooseModels/User";
+import type { User as DBUser } from "./lib/db/mongooseModels/User";
+import { ObjectId } from "mongoose";
+
+export type User = DBUser & { _id: ObjectId };
 
 export type Status = (typeof status)[keyof typeof status];
 
@@ -85,10 +88,7 @@ export type SignupBodyValidationSuccess = {
 
 export type SignupBodyValidationError = {
   operationStatus: "error";
-  errors: {
-    message: string;
-    field: string | number;
-  }[];
+  errors: ZodFieldError[];
 };
 
 export type SignupBodyValidationResult =
@@ -102,10 +102,7 @@ export type LoginBodyValidationResult =
     }
   | {
       operationStatus: "error";
-      errors: {
-        message: string;
-        field: string | number;
-      }[];
+      errors: ZodFieldError[];
     };
 
 export type OperationStatus = "success" | "error";
@@ -144,3 +141,17 @@ export type ZodFieldError = {
   message: string;
   field: string | number;
 };
+
+export type SignupRequestResult =
+  | {
+      operationStatus: "success";
+      data: {
+        user?: User;
+        message?: string;
+      };
+    }
+  | {
+      operationStatus: "error";
+      error?: string;
+      errors?: ZodFieldError[];
+    };
