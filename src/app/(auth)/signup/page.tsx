@@ -48,23 +48,17 @@ export default function Signup() {
     if (!formState.email || !formState.password || !formState.username) {
       if (!formState.password) {
         passwordRef.current?.focus();
-        if (passwordErrRef.current) {
-          passwordErrRef.current.textContent = "Password is required";
-        }
+        passwordErrRef.current!.textContent = "Password is required";
       }
 
       if (!formState.username) {
         usernameRef.current?.focus();
-        if (usernameErrRef.current) {
-          usernameErrRef.current.textContent = "Username is required";
-        }
+        usernameErrRef.current!.textContent = "Username is required";
       }
 
       if (!formState.email) {
         emailRef.current?.focus();
-        if (emailErrRef.current) {
-          emailErrRef.current.textContent = "Email is required";
-        }
+        emailErrRef.current!.textContent = "Email is required";
       }
 
       return;
@@ -102,24 +96,18 @@ export default function Signup() {
 
         if (passwordErr || usernameErr || emailErr) {
           if (passwordErr) {
-            if (passwordErrRef.current) {
-              passwordErrRef.current.textContent = passwordErr.message;
-              passwordRef.current?.focus();
-            }
+            passwordErrRef.current!.textContent = passwordErr.message;
+            passwordRef.current?.focus();
           }
 
           if (usernameErr) {
-            if (usernameErrRef.current) {
-              usernameErrRef.current.textContent = usernameErr.message;
-              usernameRef.current?.focus();
-            }
+            usernameErrRef.current!.textContent = usernameErr.message;
+            usernameRef.current?.focus();
           }
 
           if (emailErr) {
-            if (emailErrRef.current) {
-              emailErrRef.current.textContent = emailErr.message;
-              emailRef.current?.focus();
-            }
+            emailErrRef.current!.textContent = emailErr.message;
+            emailRef.current?.focus();
           }
         }
 
@@ -162,15 +150,9 @@ export default function Signup() {
   }
 
   function clearErrMsgFields() {
-    if (emailErrRef.current) {
-      emailErrRef.current.textContent = "";
-    }
-    if (usernameErrRef.current) {
-      usernameErrRef.current.textContent = "";
-    }
-    if (passwordErrRef.current) {
-      passwordErrRef.current.textContent = "";
-    }
+    emailErrRef.current!.textContent = "";
+    usernameErrRef.current!.textContent = "";
+    passwordErrRef.current!.textContent = "";
   }
 
   return (
