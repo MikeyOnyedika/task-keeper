@@ -36,17 +36,16 @@ export default function Project({ params }: Props) {
   return (
     <section className="p-4 h-full w-full flex flex-col">
       <header>
-        <nav>
-          <ul className="flex gap-1 justify-center rounded-full">
+        <nav className="flex justify-center">
+          <ul className="flex gap-1 justify-center rounded-full w-fit bg-accent/5 px-3 py-3">
             {projectTabs.map((item) => (
               <li key={item.title}>
                 <Link
                   href={`/projects/${projectId}/${item.title}`}
-                  className={`p-2 text-sm hover:bg-gray-5 rounded-full px-4 border-2 ${
-                    currentTabTitle === item.title
-                      ? "border-gray-25 bg-gray-5"
-                      : "border-[transparent]"
-                  }`}
+                  className={`px-4 py-1.5 text-sm  rounded-full  border-2 ${currentTabTitle === item.title
+                    ? "border-accent/50 bg-accent/90 text-primary"
+                    : "border-[transparent] hover:bg-accent/10"
+                    }`}
                 >
                   {item.label}
                 </Link>
