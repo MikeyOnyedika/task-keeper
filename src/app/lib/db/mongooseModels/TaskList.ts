@@ -1,36 +1,19 @@
 import { model, Schema } from "mongoose";
-import { status, priority } from "@/app/constants";
+import { status } from "@/app/constants";
 
-const taskItemSchema = new Schema(
-  {
-    title: String,
-    description: String,
-    status: {
-      type: String,
-      enum: [status.ACTIVE, status.COMPLETED, status.PAUSED, status.PENDING],
-    },
-    priority: {
-      type: String,
-      enum: [priority.HIGH, priority.MID, priority.LOW],
-    },
-    startDate: Date,
-    deadline: Date,
-    estimatedCompletionTime: String,
-  },
-  {
-    timestamps: true,
-  }
-);
 
 export const taskListSchema = new Schema(
   {
     title: String,
     status: {
       type: String,
-      enum: [status.ACTIVE, status.COMPLETED, status.PAUSED, status.PENDING],
-      defaultValue: status.PENDING,
+      enum: [status.IN_PROGRESS, status.COMPLETED, status.PAUSED, status.NOT_STARTED],
+      defaultValue: status.NOT_STARTED,
     },
-    taskItems: [taskItemSchema],
+    taskItems: {
+      type: Schema.Types.Array,
+      ref: "Task"
+    }
   },
   {
     timestamps: true,

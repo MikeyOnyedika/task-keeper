@@ -6,17 +6,17 @@ import TaskLists from "./(main)/projects/[...id]/components/TaskLists";
 // most typings in the types.ts file is generated from the constants here. This is why I don't import any types here
 
 const status = {
-  ACTIVE: "active",
+  IN_PROGRESS: "in-progress",
   COMPLETED: "completed",
   PAUSED: "paused",
-  PENDING: "pending",
+  NOT_STARTED: "not-started",
 } as const;
 
 // this is for a select input field
 const statusOptions = [
   {
-    label: "Active",
-    value: status.ACTIVE,
+    label: "In-Progress",
+    value: status.IN_PROGRESS,
   },
   {
     label: "Completed",
@@ -27,8 +27,8 @@ const statusOptions = [
     value: status.PAUSED,
   },
   {
-    label: "Pending",
-    value: status.PENDING,
+    label: "Not-Started",
+    value: status.NOT_STARTED,
   },
 ];
 
