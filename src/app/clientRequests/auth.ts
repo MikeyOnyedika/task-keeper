@@ -1,6 +1,8 @@
 import { AxiosError } from "axios";
-import { SignupBody, SignupRequestResult, ZodFieldError } from "../types";
+import { SigninBody, SigninRequestResult, SignupBody, SignupRequestResult, ZodFieldError } from "../types";
 import api from "./axios.config";
+import { signIn } from "next-auth/react";
+import { parseJSON } from "../utils/helpers";
 
 export async function signup({
   username,
@@ -64,4 +66,40 @@ export async function signup({
       error,
     };
   }
+}
+
+export async function logIn({ email, password }: SigninBody): Promise<SigninRequestResult> {
+  try {
+    const res = await signIn("credentials", {
+      password,
+      email,
+      redirect: false,
+    });
+
+    if (res?.error) {
+      const operationStatus = "error"
+      const err = parseJSON<ZodFieldError[]>(res.error);
+      // if err parsing fails, it means err is just a string
+      if (err === false) {
+        return {
+          operationStatus,
+          error: res.error
+        }
+      }
+      return {
+        operationStatus,
+        errors: err
+      }
+    }
+    return {
+      operationStatus: "success",
+    }
+  } catch (err) {
+    console.log("nextauth login exception: ", err);
+    return {
+      operationStatus: "error",
+      error: "Failed to login"
+    }
+  }
+
 }

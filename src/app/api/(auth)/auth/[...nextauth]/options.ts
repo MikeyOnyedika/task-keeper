@@ -1,11 +1,12 @@
 import User from "@/app/lib/db/models/user";
 import { validateLoginBody } from "@/app/utils/validateLoginBody";
 import { NextAuthOptions } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import CredentialsProvider from "next-auth/providers/credentials";
+import GithubProvider from "next-auth/providers/github"
 
 const options: NextAuthOptions = {
   providers: [
-    Credentials({
+    CredentialsProvider({
       name: "Credentials",
       credentials: {
         username: {
@@ -35,6 +36,7 @@ const options: NextAuthOptions = {
         }
 
         const body = validationResult.body;
+        // TODO: you should implement checking for password validity using bcrypt, but should return the same error message in any case
         const findUserResult = await User.findOneByEmail(body.email);
         if (findUserResult.operationStatus === "error") {
           return {
@@ -59,16 +61,22 @@ const options: NextAuthOptions = {
         };
       },
     }),
+    GithubProvider({
+      clientId: process.env.GITHUB_CLIENT_ID as string,
+      clientSecret: process.env.GITHUB_CLIENT_SECRET as string
+    })
   ],
   pages: {
     signIn: "/login",
   },
   callbacks: {
+    // this signIn callback is called immediately after the authorize function returns it's result. 'user' is whatever is returned from the authorize()
     async signIn({ user: u }) {
       const user = u as unknown as any;
       if (user.error) {
         throw new Error(user.error);
       } else if (user.errors) {
+        // you have to JSON.parse() this on the frontend
         throw new Error(JSON.stringify(user.errors));
       } else {
         return true;

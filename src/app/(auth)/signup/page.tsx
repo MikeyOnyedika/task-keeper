@@ -11,7 +11,7 @@ import { useMutation } from "@tanstack/react-query";
 import { signup } from "@/app/clientRequests/auth";
 import { SignupBody, User } from "@/app/types";
 import { findMatchingFieldError } from "@/app/utils/findMatchingFieldError";
-import { signIn } from "next-auth/react";
+import GithubSignIn from "../components/GithubSignIn";
 
 const initialFormState = {
   username: "",
@@ -32,6 +32,7 @@ export default function Signup() {
   const passwordErrRef = useRef<HTMLParagraphElement>(null);
 
   const [formState, setFormState] = useState(initialFormState);
+
   const signupMutation = useMutation({
     mutationFn: async ({ username, email, password }: SignupBody) =>
       await signup({ username, email, password }),
@@ -197,13 +198,7 @@ export default function Signup() {
           </div>
         </div>
         <div className="">
-          <Link
-            href="#"
-            className="rounded  px-4 py-2 flex gap-4 items-center justify-center bg-primary border-2"
-          >
-            <Image src={Github} alt="" className="w-6" />
-            <span>Continue with Github</span>
-          </Link>
+          <GithubSignIn isAuthenticating={signupMutation.isPending} setIsAuthenticating={setIsAuthenticating} />
         </div>
         <div>
           <p className="text-gray-50 text-center">

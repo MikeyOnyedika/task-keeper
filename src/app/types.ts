@@ -81,6 +81,8 @@ export type SignupBody = {
   email: string;
 };
 
+export type SigninBody = Omit<SignupBody, "username">
+
 export type SignupBodyValidationSuccess = {
   operationStatus: "success";
   body: SignupBody;
@@ -97,45 +99,45 @@ export type SignupBodyValidationResult =
 
 export type LoginBodyValidationResult =
   | {
-      operationStatus: "success";
-      body: Omit<SignupBody, "username">;
-    }
+    operationStatus: "success";
+    body: Omit<SignupBody, "username">;
+  }
   | {
-      operationStatus: "error";
-      errors: ZodFieldError[];
-    };
+    operationStatus: "error";
+    errors: ZodFieldError[];
+  };
 
 export type OperationStatus = "success" | "error";
 
 export type CheckUserAlreadyExistsResult =
   | {
-      operationStatus: "success";
-      userAlreadyExists: boolean;
-    }
+    operationStatus: "success";
+    userAlreadyExists: boolean;
+  }
   | {
-      operationStatus: "error";
-      error: string;
-    };
+    operationStatus: "error";
+    error: string;
+  };
 
 export type DBCreateUserResult =
   | {
-      operationStatus: "success";
-      user: Omit<User, "password">;
-    }
+    operationStatus: "success";
+    user: Omit<User, "password">;
+  }
   | {
-      operationStatus: "error";
-      error: string;
-    };
+    operationStatus: "error";
+    error: string;
+  };
 
 export type DBFindOneUserByEmailResult =
   | {
-      operationStatus: "success";
-      user: (Omit<User, "password"> & { _id: string }) | undefined;
-    }
+    operationStatus: "success";
+    user: (Omit<User, "password"> & { _id: string }) | undefined;
+  }
   | {
-      operationStatus: "error";
-      error: string;
-    };
+    operationStatus: "error";
+    error: string;
+  };
 
 export type ZodFieldError = {
   message: string;
@@ -144,14 +146,25 @@ export type ZodFieldError = {
 
 export type SignupRequestResult =
   | {
-      operationStatus: "success";
-      data: {
-        user?: User;
-        message?: string;
-      };
-    }
-  | {
-      operationStatus: "error";
-      error?: string;
-      errors?: ZodFieldError[];
+    operationStatus: "success";
+    data: {
+      user?: User;
+      message?: string;
     };
+  }
+  | {
+    operationStatus: "error";
+    error?: string;
+    errors?: ZodFieldError[];
+  };
+
+export type SigninRequestResult =
+  | {
+    operationStatus: "success";
+  }
+  | {
+    operationStatus: "error";
+    error?: string;
+    errors?: ZodFieldError[];
+  };
+
