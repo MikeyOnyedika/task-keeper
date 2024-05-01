@@ -198,7 +198,7 @@ export default function Signup() {
           </div>
         </div>
         <div className="">
-          <GithubSignIn isAuthenticating={signupMutation.isPending} setIsAuthenticating={setIsAuthenticating} />
+          <GithubSignIn isAuthenticating={signupMutation.isPending} />
         </div>
         <div>
           <p className="text-gray-50 text-center">

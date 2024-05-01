@@ -5,16 +5,12 @@ import { Github } from "@/app/assets";
 
 type Props = {
 	isAuthenticating: boolean,
-	setIsAuthenticating: (update: boolean) => void,
 }
 
-export default function GithubSignIn({ isAuthenticating, setIsAuthenticating }: Props) {
-
+export default function GithubSignIn({ isAuthenticating }: Props) {
 	async function signInWithGithub() {
 		if (isAuthenticating) return;
-		setIsAuthenticating(true)
 		const res = await signIn("github");
-		setIsAuthenticating(false)
 	}
 
 	return (
