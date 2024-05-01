@@ -3,7 +3,6 @@ import { ReactNode } from "react";
 import options from "@/app/api/(auth)/auth/[...nextauth]/options";
 import { redirect } from "next/navigation";
 import { headers } from "next/headers";
-import AuthStateMonitor from "./AuthStateMonitor";
 
 export default async function AuthProtected({
   children,
@@ -19,7 +18,6 @@ export default async function AuthProtected({
   }
   return (
     <>
-      <AuthStateMonitor />
       {children}
     </>
   );

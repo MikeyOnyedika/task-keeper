@@ -1,8 +1,7 @@
 import { AxiosError } from "axios";
-import { SigninBody, SigninRequestResult, SignupBody, SignupRequestResult, ZodFieldError } from "../types";
+import { SigninBody, SigninRequestResponse, SignupBody, SignupRequestResult, ZodFieldError } from "../types";
 import api from "./axios.config";
 import { signIn } from "next-auth/react";
-import { parseJSON } from "../utils/helpers";
 
 export async function signup({
   username,
@@ -69,30 +68,31 @@ export async function signup({
 }
 
 export async function logIn({ email, password }: SigninBody): Promise<SigninRequestResult> {
+  // TODO: I think this functino is broken. My login page breaks and sasys somthing along the lines of ... 
   try {
     const res = await signIn("credentials", {
       password,
       email,
       redirect: false,
     });
-
     if (res?.error) {
+      const err = JSON.parse(res?.error);
       const operationStatus = "error"
-      const err = parseJSON<ZodFieldError[]>(res.error);
-      // if err parsing fails, it means err is just a string
-      if (err === false) {
+      console.log("nextauth error: ", err);
+      if (err instanceof Array) {
         return {
           operationStatus,
-          error: res.error
+          errors: err
         }
       }
       return {
         operationStatus,
-        errors: err
+        error: err
       }
     }
     return {
       operationStatus: "success",
+      message: "Login Successful"
     }
   } catch (err) {
     console.log("nextauth login exception: ", err);

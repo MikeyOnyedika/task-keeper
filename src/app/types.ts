@@ -132,7 +132,7 @@ export type DBCreateUserResult =
 export type DBFindOneUserByEmailResult =
   | {
     operationStatus: "success";
-    user: (Omit<User, "password"> & { _id: string }) | undefined;
+    user: (User & { _id: string }) | undefined;
   }
   | {
     operationStatus: "error";
